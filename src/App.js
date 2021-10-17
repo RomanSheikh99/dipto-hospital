@@ -1,20 +1,19 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Footer from './Components/Sheared/Footer/Footer';
+import NavBar from './Components/Sheared/NavBar/NavBar';
 
 function App() {
   return (
-    <div className="App">
-      <div className="text-danger">hello react</div>
-      <Container>
-        <Row>
-          <Col>
-            column 1
-          </Col>
-          <Col>
-            column 1
-          </Col>
-        </Row>
-      </Container>
+    <div>
+      <Router>
+        <NavBar></NavBar>
+        <Switch>
+          <Route exact path="/">
+          </Route>
+        </Switch>
+        <Footer></Footer>
+      </Router>
     </div>
   );
 }
