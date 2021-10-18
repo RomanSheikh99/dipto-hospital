@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import AuthProvider from './Components/Context/AuthProvider/AuthProvider';
 import About from './Components/Pages/About/About';
 import Contact from './Components/Pages/Contact/Contact';
 import DoctorProfile from './Components/Pages/DoctorProfile/DoctorProfile';
@@ -16,7 +17,7 @@ import NavBar from './Components/Sheared/NavBar/NavBar';
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <Router>
         <NavBar></NavBar>
         <Switch>
@@ -59,7 +60,7 @@ function App() {
         </Switch>
         <Footer></Footer>
       </Router>
-    </div>
+    </AuthProvider>
   );
 }
 

@@ -2,8 +2,24 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
 
 const Register = () => {
+    const { googleSignIn, getEmail, getPassword, signUpUsingEmail,error } = useAuth();
+    
+    const handleEmail = (e) => {
+        const email = e.target.value;
+        getEmail(email);
+        e.target.value=''
+    }
+
+    const handlePassword = (e) => {
+        const password = e.target.value;
+        getPassword(password);
+        e.target.value=''
+    }
+
+    
     return (
         <div className="d-flex justify-content-center align-items-center my-5">
             <div style={{ boxShadow: "0px 0px 8px 0px #ddd" }} className=" text-center rounded-2 p-4">
@@ -15,24 +31,27 @@ const Register = () => {
                 <h4 className="my-3">Please Register</h4>
                 <div>
                     <div class="form-floating mb-3">
-                        <input style={{ width: '260px' }} type="email" class="form-control py-2 rounded-pill" id="floatingInput" placeholder="Your Email" />
+                        <input onChange={handleEmail} style={{ width: '260px' }} type="email" class="form-control py-2 rounded-pill" id="floatingInput" placeholder="Your Email" />
                         <label for="floatingInput">Email Address</label>
                     </div>
                     <div class="form-floating">
-                        <input style={{ width: '260px' }} type="password" class="form-control py-2 rounded-pill" id="floatingPassword" placeholder="Password" />
+                        <input onChange={handlePassword} style={{ width: '260px' }} type="password" class="form-control py-2 rounded-pill" id="floatingPassword" placeholder="Password" />
                         <label for="floatingPassword">Password</label>
                     </div>
                 </div>
                 <div>
                     <button
+                        onClick={signUpUsingEmail}
                         style={{ background: '#12C1AD', outline: 'none', width: '260px' }}
                         className="btn mt-3 px-3 rounded-pill border-0 text-white">
                         Register 
                     </button>
                 </div>
-                <span className="mt-1">All Ready have an Account? <Link to='/register'>Login</Link></span>
+                <span className="text-danger my-2">{error}</span><br />
+                <span className="mt-1">All Ready have an Account? <Link to='/login'>Login</Link></span>
                 <h6 className="my-2">---Or---</h6>
                 <button
+                    onClick={googleSignIn}
                     style={{ background: '#12C1AD', outline: 'none', width: '260px' }}
                     className="btn px-2 rounded-pill border-0 text-white">
                     Register With Google 

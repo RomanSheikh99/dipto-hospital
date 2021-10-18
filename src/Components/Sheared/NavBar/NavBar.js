@@ -1,9 +1,12 @@
 import React from 'react';
 import { Nav, Navbar, Button, Container } from 'react-bootstrap';
 import { Link, NavLink } from 'react-router-dom';
+import useAuth from '../../../Hooks/useAuth';
 import logo from '../../../images/logo.png'
 
 const NavBar = () => {
+    const { user, logOut} = useAuth();
+    
     return (
         <div className='sticky-top bg-white'>
             <Container>
@@ -76,10 +79,10 @@ const NavBar = () => {
                             </Nav.Link>
                         </Nav>
                         <Nav
-                            className="ms-auto my-2 my-lg-0"
+                            className="ms-auto my-2 my-lg-0 d-flex align-items-center"
                             navbarScroll
                         >
-                            <Button
+                            {user.email ?<span className="me-2">{user.email}</span>:<Button
                                 style={{ background: 'none', outline: 'none' }}
                                 className="text-black border-0">
                                 <Link
@@ -87,8 +90,17 @@ const NavBar = () => {
                                     to='/logIn'>
                                     Log In
                                 </Link>
-                            </Button>
-                            <Button
+                            </Button>}
+                            {user.email ? <Button
+                                onClick={logOut}
+                                style={{ background: '#12C1AD', outline: 'none' }}
+                                className="rounded-pill border-0">
+                                <Link
+                                    style={{ color: '#fff', textDecoration: "none" }}
+                                    to='/register'>
+                                    LOGOUT
+                                </Link>
+                            </Button>:<Button
                                 style={{ background: '#12C1AD', outline: 'none' }}
                                 className="rounded-pill border-0">
                                 <Link
@@ -96,7 +108,7 @@ const NavBar = () => {
                                     to='/register'>
                                     Register
                                 </Link>
-                            </Button>
+                            </Button>}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
