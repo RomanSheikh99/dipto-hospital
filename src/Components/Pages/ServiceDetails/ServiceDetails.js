@@ -7,7 +7,6 @@ const ServiceDetails = () => {
     const { serviceID } = useParams();
 
     const displayService = services.find(service => service.id === parseFloat(serviceID))
-    console.log(displayService);
 
     return (
         <div className="my-5">

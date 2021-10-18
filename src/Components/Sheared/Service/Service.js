@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const Service = ({ service }) => {
 
     return (
-        <Col md={4}>
+        <Col md={4} sm={6}>
             <Card className='Services-img'>
                 <Card.Img
                     

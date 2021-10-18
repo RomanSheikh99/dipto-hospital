@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Doctor = ({doctor}) => {
     return (
-        <Col md={4}>
+        <Col md={4} sm={6}>
             <Link to={`/DoctorProfile/${doctor.id}`}>
                 <div style={{ overflow: 'hidden' }} className="position-relative doctor-card">
                     <div
