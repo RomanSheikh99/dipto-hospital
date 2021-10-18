@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import DoctorProfile from './Components/Pages/DoctorProfile/DoctorProfile';
 import Home from './Components/Pages/Home/Home/Home';
 import OurServices from './Components/Pages/OurServices/OurServices';
 import ServiceDetails from './Components/Pages/ServiceDetails/ServiceDetails';
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route exact path="/ServiceDetails/:serviceID">
             <ServiceDetails></ServiceDetails>
+          </Route>
+          <Route exact path="/DoctorProfile/:doctorID">
+            <DoctorProfile></DoctorProfile>
           </Route>
           <Route exact path="/welldone">
             <Welldone></Welldone>

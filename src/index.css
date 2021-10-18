@@ -20,3 +20,37 @@ body {
 .Services-img:hover img{
   transform: scaleX(1.2);
 }
+.doctor-card{
+ transition: all 1s;
+ cursor: pointer;
+}
+.doctor-details{
+  background: #0000005e;
+  height: 0%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  display: none;
+  transition: all 1s;
+  cursor: pointer;
+}
+.doctor-card:hover .doctor-details{
+  display: flex;
+  height: 100%;
+}
+.doctors-btn{
+  background-color: #ddd;
+  outline: none;
+  color: #666;
+  text-decoration: none;
+  transition: .4s;
+}
+
+
+
+.doctors-btn:hover{
+  background-color: #12C1AD; 
+  color: #fff;
+}
+
