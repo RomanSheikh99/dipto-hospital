@@ -1,11 +1,24 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 
 const Login = () => {
-    const { googleSignIn, getEmail, getPassword, signInUsingEmail,error} = useAuth();
+    const {
+        googleSignIn,
+        getEmail,
+        getPassword,
+        signInUsingEmail,
+        error,
+        setUser,
+        setError,
+        setIsLoading
+    } = useAuth();
+    const location = useLocation()
+    const history = useHistory()
+    const redirect_url = location.state?.from || '/home';
+    
     const handleEmail = (e) => {
         const email = e.target.value;
         getEmail(email);
@@ -15,6 +28,33 @@ const Login = () => {
         const password = e.target.value;
         getPassword(password);
     }
+
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+                history.push(redirect_url);
+            })
+            .catch(error => {
+                setError(error.massage)
+            })
+            .finally(() => setIsLoading(false))
+    };
+
+    const handleEmailLogin = () => {
+        signInUsingEmail()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+                history.push(redirect_url);
+            })
+            .catch(error => {
+                setError(error.massage)
+            })
+            .finally(() => setIsLoading(false))
+    };
+
     return (
         <div className="d-flex justify-content-center align-items-center my-5">
             <div style={{ boxShadow: "0px 0px 8px 0px #ddd" }} className=" text-center rounded-2 p-4">
@@ -36,7 +76,7 @@ const Login = () => {
                 </div>
                 <div>
                     <button
-                        onClick={signInUsingEmail}
+                        onClick={handleEmailLogin}
                         style={{ background: '#12C1AD', outline: 'none', width: '260px' }}
                         className="btn mt-3 px-3 rounded-pill border-0 text-white">
                         Login
@@ -46,7 +86,7 @@ const Login = () => {
                 <span className="mt-1">Don't have any Account? <Link to='/register'>Register</Link></span>
                 <h6 className="my-2">---Or---</h6>
                 <button
-                    onClick={googleSignIn}
+                    onClick={handleGoogleLogin}
                     style={{ background: '#12C1AD', outline: 'none', width: '260px' }}
                     className="btn px-2 rounded-pill border-0 text-white">
                     Login With Google 

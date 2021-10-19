@@ -7,9 +7,7 @@ import doctors from '../../../utilities/doctors'
 const DoctorProfile = () => {
     const { doctorID } = useParams();
     
-    console.log(doctors);
     const displayDoctors = doctors.find(doctor => doctor.id === parseInt(doctorID));
-    console.log(displayDoctors);
     return (
         <div className="my-5">
             <Container>

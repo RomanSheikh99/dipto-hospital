@@ -82,7 +82,7 @@ const NavBar = () => {
                             className="ms-auto my-2 my-lg-0 d-flex align-items-center"
                             navbarScroll
                         >
-                            {user.email ?<span className="me-2">{user.email}</span>:<Button
+                            {user.email ? <span className="me-2">{user.displayName ? user.displayName : user.email}</span> : <Button
                                 style={{ background: 'none', outline: 'none' }}
                                 className="text-black border-0">
                                 <Link
@@ -93,14 +93,10 @@ const NavBar = () => {
                             </Button>}
                             {user.email ? <Button
                                 onClick={logOut}
-                                style={{ background: '#12C1AD', outline: 'none' }}
+                                style={{ background: '#12C1AD', outline: 'none', color: '#fff' }}
                                 className="rounded-pill border-0">
-                                <Link
-                                    style={{ color: '#fff', textDecoration: "none" }}
-                                    to='/register'>
-                                    LOGOUT
-                                </Link>
-                            </Button>:<Button
+                                LOGOUT
+                            </Button> : <Button
                                 style={{ background: '#12C1AD', outline: 'none' }}
                                 className="rounded-pill border-0">
                                 <Link

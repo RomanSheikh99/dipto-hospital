@@ -1,23 +1,59 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation,useHistory} from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 
 const Register = () => {
-    const { googleSignIn, getEmail, getPassword, signUpUsingEmail,error } = useAuth();
+    const {
+        googleSignIn,
+        getEmail,
+        getPassword,
+        signUpUsingEmail,
+        error,
+        setUser,
+        setError,
+        setIsLoading
+    } = useAuth();
+    const location = useLocation()
+    const history = useHistory()
+    const redirect_url = location.state?.from || '/home';
     
     const handleEmail = (e) => {
         const email = e.target.value;
         getEmail(email);
-        e.target.value=''
     }
 
     const handlePassword = (e) => {
         const password = e.target.value;
         getPassword(password);
-        e.target.value=''
     }
+
+    const handleGoogleRegister = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+                history.push(redirect_url);
+            })
+            .catch(error => {
+                setError(error.massage)
+            })
+            .finally(() => setIsLoading(false))
+    }
+
+    const handleEmailRegister = () => {
+        signUpUsingEmail()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+                history.push(redirect_url);
+            })
+            .catch(error => {
+                setError(error.massage)
+            })
+            .finally(() => setIsLoading(false))
+    };
 
     
     return (
@@ -41,7 +77,7 @@ const Register = () => {
                 </div>
                 <div>
                     <button
-                        onClick={signUpUsingEmail}
+                        onClick={handleEmailRegister}
                         style={{ background: '#12C1AD', outline: 'none', width: '260px' }}
                         className="btn mt-3 px-3 rounded-pill border-0 text-white">
                         Register 
@@ -51,7 +87,7 @@ const Register = () => {
                 <span className="mt-1">All Ready have an Account? <Link to='/login'>Login</Link></span>
                 <h6 className="my-2">---Or---</h6>
                 <button
-                    onClick={googleSignIn}
+                    onClick={handleGoogleRegister}
                     style={{ background: '#12C1AD', outline: 'none', width: '260px' }}
                     className="btn px-2 rounded-pill border-0 text-white">
                     Register With Google 

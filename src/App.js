@@ -14,6 +14,7 @@ import ServiceDetails from './Components/Pages/ServiceDetails/ServiceDetails';
 import Welldone from './Components/Pages/Welldone/Welldone';
 import Footer from './Components/Sheared/Footer/Footer';
 import NavBar from './Components/Sheared/NavBar/NavBar';
+import PrivateRoute from './Components/Sheared/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -45,15 +46,15 @@ function App() {
           <Route exact path="/register">
             <Register></Register>
           </Route>
-          <Route exact path="/ServiceDetails/:serviceID">
+          <PrivateRoute exact path="/ServiceDetails/:serviceID">
             <ServiceDetails></ServiceDetails>
-          </Route>
-          <Route exact path="/DoctorProfile/:doctorID">
+          </PrivateRoute>
+          <PrivateRoute exact path="/DoctorProfile/:doctorID">
             <DoctorProfile></DoctorProfile>
-          </Route>
-          <Route exact path="/welldone">
+          </PrivateRoute>
+          <PrivateRoute exact path="/welldone">
             <Welldone></Welldone>
-          </Route>
+          </PrivateRoute>
           <Route path="*">
             <NotFound></NotFound>
           </Route>
