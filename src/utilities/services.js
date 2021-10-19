@@ -1,4 +1,5 @@
- const services = [
+// create services object for get object from services details.
+const services = [
     {
       id: 1,
       name: "blood analysis",

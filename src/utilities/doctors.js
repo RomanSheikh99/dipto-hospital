@@ -1,3 +1,4 @@
+// create doctors object for get object from doctors Profile.
 const doctors = [
     {
       id: 1,
